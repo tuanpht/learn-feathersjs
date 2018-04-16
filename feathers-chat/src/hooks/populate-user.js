@@ -12,7 +12,7 @@ module.exports = function (options = {}) {
       const user = await app.service('users').get(message.userId, params);
 
       message.user = user;
-    }))
+    }));
 
     return context;
   };
