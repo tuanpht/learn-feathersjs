@@ -65,3 +65,33 @@ console.log(`The area of mySquare is ${mySquare.area()}`);
 ### Promises
 - [Reference](https://www.promisejs.org/)
 - Async / Await: [1](https://medium.com/@bluepnume/learn-about-promises-before-you-start-using-async-await-eb148164a9c8), [2](https://blog.risingstack.com/mastering-async-await-in-nodejs/)
+- Services:
+  + Define service:
+  ```
+  class MyService {
+    async find(params) {
+      return [];
+    }
+    async get(id, params) {}
+    async create(data, params) {}
+    async update(id, data, params) {}
+    async patch(id, data, params) {}
+    async remove(id, params) {}
+  }
+  ```
+  + Methods:
+    + `find` - Find all data (potentially matching a query)
+    + `get` - Get a single data entry by its unique identifier
+    + `create` - Create new data
+    + `update` - Update an existing data entry by completely replacing it
+    + `patch` - Update one or more data entries by merging with the new data
+    + `remove` - Remove one or more existing data entries
+
+    The parameters for service methods are:
+
+    + id - The unique identifier for the data
+    + data - The data sent by the user (for creating and updating)
+    + params (optional) - Additional parameters, for example the authenticated user or the query
+
+  + Register service: `app.use('service_name', new MyService())`
+  + Some method: `create`, `update`, `patch`, `remove` auto expose an event `created`, `updated`, `patched` or `removed`
