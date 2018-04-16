@@ -95,3 +95,28 @@ console.log(`The area of mySquare is ${mySquare.area()}`);
 
   + Register service: `app.use('service_name', new MyService())`
   + Some method: `create`, `update`, `patch`, `remove` auto expose an event `created`, `updated`, `patched` or `removed`
+
+- Hooks:
+  + Like *middleware*
+  + Available functions middleware: `before`, `after` and `errors`
+  + Hooks run in order, stop when one throws an error
+  + Hooks are commonly used to handle things like validation, authorization, logging, populating related entities, sending notifications and more.
+  + Refs: [1](https://blog.feathersjs.com/api-service-composition-with-hooks-47af13aa6c01), [2](https://docs.feathersjs.com/api/hooks.html)
+  + Context: The hook context is an object which contains information about the service method call. It has read-only and writable properties.
+
+    Read-only properties are:
+    + `context.app` - The Feathers application object
+    + `context.service` - The service this hook is currently running on
+    + `context.path` - The path of the service
+    + `context.method` - The service method
+    + `context.type` - The hook type (before, after or error)
+
+    Writeable properties are:
+
+    + `context.params` - The service method call params. For external calls, params usually contains:
+      + `context.params.query` - The query (e.g. query string for REST) for the service call
+      + `context.params.provider` - The name of the transport (which we will look at in the next chapter) the call has been made through. Usually rest, socketio, primus. Will be undefined for internal calls.
+    + `context.id` - The id for a get, remove, update and patch service method call
+    + `context.data` - The data sent by the user in a create, update and patch service method call
+    + `context.error` - The error that was thrown (in error hooks)
+    + `context.result` - The result of the service method call (in after hooks)
