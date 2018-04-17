@@ -7,7 +7,7 @@ const crypto = require('crypto');
 // Gravatar service
 const gravatarUrl = 'https://s.gravatar.com/avatar';
 // Image size, 60px
-const query = ' s=60';
+const query = 's=60';
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
@@ -18,7 +18,7 @@ module.exports = function (options = {}) {
     // Gravatar use md5 hash from email to get image
     const hash = crypto.createHash('md5').update(email).digest('hex');
 
-    context.data.avatar = `${gravatarUrl}/${hash}?${query}`;;
+    context.data.avatar = `${gravatarUrl}/${hash}?${query}`;
 
     return context;
   };
